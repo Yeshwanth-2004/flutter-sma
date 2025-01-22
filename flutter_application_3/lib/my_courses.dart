@@ -3,7 +3,7 @@ import 'package:flutter_application_3/play%20courses.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 String? dropdown_text;
-TextEditingController _search=TextEditingController();
+TextEditingController _search = TextEditingController();
 List<String> courses=['All','Ongoing','Completed','Downloaded'];
 
 
@@ -105,6 +105,7 @@ class _MyCoursesState extends State<MyCourses> {
                   )
                 ),
                 controller: _search,
+                keyboardType: TextInputType.number
               ),
             ),
             

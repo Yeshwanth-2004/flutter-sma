@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_3/mobile.dart';
 import 'package:flutter_application_3/my_courses.dart';
 import 'package:google_fonts/google_fonts.dart';
+/* import 'package:ui_own/mobile.dart';
+import 'package:ui_own/my_courses.dart'; */
 
 class Playcourses extends StatefulWidget {
   const Playcourses({super.key});
@@ -13,7 +15,9 @@ class Playcourses extends StatefulWidget {
 class _PlaycoursesState extends State<Playcourses> {
   int playingIndex = -1;
   int playing = -1; // Tracks which container is currently playing
-
+  int Playing=-1;
+  int Index=-1;
+  int curr=-1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,11 @@ class _PlaycoursesState extends State<Playcourses> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 50, 0, 10),
-                      child: const Icon(Icons.keyboard_arrow_down,color: Colors.white,),
+                      child: GestureDetector(child: const Icon(Icons.keyboard_arrow_down,color: Colors.white,),
+                      onTap: () {
+                        Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => MyCourses()));
+                      },),
                     ),
                     Row(
                       children: [
@@ -72,7 +80,7 @@ class _PlaycoursesState extends State<Playcourses> {
                           onTap: (){
                             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>MyCourses()),
+              MaterialPageRoute(builder: (context) =>loginmob()),
             );
                           },),
                         ),
@@ -147,9 +155,11 @@ class _PlaycoursesState extends State<Playcourses> {
                             width: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: playingIndex == index
-                                  ? const Color.fromARGB(67, 237, 156, 63)
-                                  : const Color.fromARGB(44, 167, 199, 224),
+                              color: curr == index
+                              ?const Color.fromARGB(67, 237, 156, 63)
+                                  :const Color.fromARGB(44, 167, 199, 224)
+                                  
+                                  ,
                             ),
                             child: Center(
                               child: Text(
@@ -195,21 +205,33 @@ class _PlaycoursesState extends State<Playcourses> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: InkWell(
-                            child: playingIndex == index
+                            child: curr == index
                                 ? Image.asset("asset/images/play.png")
                                 : Image.asset("asset/images/images.png"),
                             onTap: () {
                               setState(() {
-                               if (playingIndex == index/* ||playing==index */) {
+                                  if(Playing==-1){
+                                  curr=index;
+                                  Playing=1;
+                                } 
+                                  else if(Playing==1 && curr==index){
+                                    Playing=-1;
+                                    curr=-1;
+                                  }
+                                   else if(Playing==1 && curr!=index){
+                                    curr=index;
+                                  }
+
+                               /*if (playingIndex == index/ ||playing==index ) {
                                           playingIndex = -1; // Set all to pause
                                         }
                                          else if(playing==-1)
                                         {
                                          
                                           playingIndex = index; // Set the current index to play
-                                        }
+                                        }*/
 
-                              });
+                              }); 
                             },
                           ),
                         ),
@@ -261,9 +283,11 @@ class _PlaycoursesState extends State<Playcourses> {
                             width: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: playing == index
-                                  ? const Color.fromARGB(67, 237, 156, 63)
-                                  : const Color.fromARGB(44, 167, 199, 224),
+                              color: curr == index+2
+                              ? const Color.fromARGB(67, 237, 156, 63)
+                              :const Color.fromARGB(44, 167, 199, 224)
+                                  
+                                  ,
                             ),
                             child: Center(
                               child: Text(
@@ -309,12 +333,25 @@ class _PlaycoursesState extends State<Playcourses> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: InkWell(
-                            child: playing == index
+                            child: curr == index+2
                                 ? Image.asset("asset/images/play.png")
                                 : Image.asset("asset/images/images.png"),
                             onTap: () {
                               setState(() {
-                                if (playing == index  ||playingIndex==index )
+
+                                if(Playing==-1){
+                                  curr=index+2;
+                                  Playing=1;
+                                }
+                                 else if(Playing==1 && curr==index+2){
+                                    Playing=-1;
+                                    curr=-1;
+                                  }
+                                  else if(Playing==1 && curr!=index+2){
+                                    curr=index+2;
+                                  }
+
+                                /* if (playing == index  ||playingIndex==index )
                                  {
                                       playing = -1; // Set all to pause
                                  }
@@ -322,7 +359,7 @@ class _PlaycoursesState extends State<Playcourses> {
                                     
                                      else if(playingIndex==-1) {
                                       playing = index; // Set the current index to play
-                                    }
+                                    } */
 
                               });
                             },
