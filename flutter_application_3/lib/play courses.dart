@@ -346,6 +346,7 @@ class _PlaycoursesState extends State<Playcourses> {
                                  else if(Playing==1 && curr==index+2){
                                     Playing=-1;
                                     curr=-1;
+                                    
                                   }
                                   else if(Playing==1 && curr!=index+2){
                                     curr=index+2;
